@@ -1,7 +1,7 @@
 # Cache-Simulation
 In acest program am realizat implemetarea a 3 tipuri de Cache ce folosesc 3 metode diferite de stocare a obiectelor, folosind principiile OOP in Java.
 
-----Pentru rulare---:
+---Pentru rulare---:
       
       1.make
       2.make run
@@ -11,7 +11,7 @@ Rezultatul va fi generat in fisierul a.out, iar fisierul de input este test.in(p
 Astfel, cele 3 tipuri de cache sunt:
 
 
---LRU(least recently used) - elementul cel mai putin utilizat va fi inlocuit cu
+---LRU(least recently used) - elementul cel mai putin utilizat va fi inlocuit cu
 noul obiect.
 
 
