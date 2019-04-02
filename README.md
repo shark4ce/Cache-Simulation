@@ -69,6 +69,8 @@ cererile premium/basic.
 
 2.GET nume_obiect - aceasta operatie va intoarce un intreg in functie de
 apartenenta obiectului la cache:
+
+
 ○ 0 - obiectul se gaseste in cache
 
 
