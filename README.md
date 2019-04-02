@@ -64,7 +64,6 @@ numarul 2.
 
 
 ----Deatlii despre implementare----
-
 	1.In Main citesc datele input din fisier si in functie de ele creez un obiect de tip MainMemory in care am un ArrrayList 
 ce va reprezenta lista(vectorul) de obiecte adaugate si un obiect ce poarte definita interfetei Cache(tipul obiectului dat
 va fi creat conform cerinterlor din fisiere, adica LRU,LFU sau FIFO).Prin urmare, conform datelor din fisier efectuezvcomanda
