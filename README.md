@@ -52,20 +52,33 @@ cache, iar in cazul in care un element exista deja in memoria principala sau
 in ambele, se va suprascrie in memoria principala si va fi eliminat din
 cache. Parametrul cereri_basic este obligatoriu, iar cereri_premium este
 optional. Asta inseamna ca pot exista input-uri ca:
+
+
 ○ ADD nume_obiect 3 - ceea ce inseamna ca avem 2 accesari de tip
 GET basic pentru obiect
+
+
 ○ ADD nume_obiect 3 5 - ceea ce inseamna ca avem mai intai 5
 accesari de tip GET premium, urmate de 3 basic.
+
+
 ○ Va trebui sa parsati liniile cu operatii de tipul ADD si sa identificati
 daca ele contin 1 sau 2 intregi, urmand sa luati decizii ulterior pentru
 cererile premium/basic.
 
+
 2.GET nume_obiect - aceasta operatie va intoarce un intreg in functie de
 apartenenta obiectului la cache:
 ○ 0 - obiectul se gaseste in cache
+
+
 ○ 1 - obiectul se gaseste doar in memoria principala. Ulterior acestei
 operatii, obiectul va fi mutat si in cache
+
+
 ○ 2 - obiectul nu a fost gasit in memoria principala
+
+
 ○ Alaturi de numarul mentionat mai sus, se va scrie pe aceeasi linie,
 separat prin spatiu, tipul de subscriptie folosit: “Free”, “Basic” sau
 “Premium”. Pentru obiectele care nu se gasesc in memoria
@@ -82,9 +95,8 @@ ce va reprezenta lista(vectorul) de obiecte adaugate si un obiect ce poarte defi
 va fi creat conform cerinterlor din fisiere, adica LRU,LFU sau FIFO).Prin urmare, conform datelor din fisier efectuezvcomanda
 "ADD" cu ajutorul metodei add() din clasa MainMemory si comanda "GET" cu ajutorul metodei addInCache() din interfata Cache
 care e suprascrisa in clasele ce extind aceasta interfata.
-	Obiectele adaugate vor fi de tip Subscriptie, care reprezinta o clasa abstracta in care avem un String name ce reprezinta
-numele fiecarui obiect adaugat si un int nr_acces in care pastrez numarul de accesari a obiectului.De asemenea mai avem o metoda
-decrement pe care o suprascriem in clasele ce extind clasa abastracta Subscriptie.
+Obiectele adaugate vor fi de tip Subscriptie, care reprezinta o clasa abstracta in care avem un String name ce reprezinta
+numele fiecarui obiect adaugat si un int nr_acces in care pastrez numarul de accesari a obiectului.De asemenea mai avem o metoda decrement pe care o suprascriem in clasele ce extind clasa abastracta Subscriptie.
 
 
   2.In clasa MainMemory avem metoda createObject() in care creeam un nou obiect in functie de parametrii primiti, apeland
@@ -110,17 +122,20 @@ acestea fiind clasele LFUCache, LRUCache si FIFOCache.
 o comanda de tip GET. Initial verificam daca obiectul dat se afla in memoria principala si respectiv in memoria cache
 cu ajutorul metodelor searchInMainM si searchInCacheM.Respectiv, in functie de rezultatul primit efectuam urmatoarele
 actiuni: 
-	-daca obiectul nu exista nici in memoria principala nici in memoria cache este afisat "2"
-	-in cazul in care acesta este prezent doar in memoria principala afisam "1",il adaugam in memoria cache si aplicam
-	metoda de decrementare:	
-		*in cazul care memoria cache este plina stergem primul element si adaugam obiectul la sfarsitul listei,astfel
+
+
+  -daca obiectul nu exista nici in memoria principala nici in memoria cache este afisat "2"
+  -in cazul in care acesta este prezent doar in memoria principala afisam "1",il adaugam in memoria cache si aplicam metoda de decrementare:	
+  
+   *in cazul care memoria cache este plina stergem primul element si adaugam obiectul la sfarsitul listei,astfel
 		fiind sters cel mai vechi element.In functia de adaugare intotdeauna adaugam noul obiect la inceputul listei,
 		astfel cel mai ,,vechi" obiect adaugand se va afla mereu la sfarsitul listei
-	-in cazul in care este prezent si in memoria principala si in memoria cache, afisam "0" si aplicam funtia de decrementare,
+		
+		
+ -in cazul in care este prezent si in memoria principala si in memoria cache, afisam "0" si aplicam funtia de decrementare,
 	il scoatem din lista si il adaugam din nou la inceputul listei.
 	
- 6.In clasa FIFOCache, metoda addInCache funtioneaza aproape la fel, doar ca obiectul va fi mereu adaugat la sfarsitul listei,
-iar in caz ca memoria cache va fi plina, vom sterge intotdeauna primul element din lista.
+ 6.In clasa FIFOCache, metoda addInCache funtioneaza aproape la fel, doar ca obiectul va fi mereu adaugat la sfarsitul listei,iar in caz ca memoria cache va fi plina, vom sterge intotdeauna primul element din lista.
 
  7.In clasa LFUCache, metoda addInCache funtioneaza in general la fel, adica obiectul nou va fi intotdeauna adaugat la inceputul listei. Dar aici mai avem si un int nr_acces, pe care il crestem de fiecare data cand efectuam o operatiunea "GET" asupra obiectului.Astfel, in cazul in care memoria cache va fi plina si va trebui sa eliminam un element din list, apelam metoda forRemove pentru a gasi elementul care va fi eliminat. In aceasta metoda, luam un "min" de tip int si un "last" de tip subscriptie pe care initial le setam cu valorile primului element din lista, adica "min" va fi egal cu nr_acces a primului element din lista, iar last va pointa catre acest elemet.Prin urmare, parcurgem toata lista de elemente( adica obiectele din memoria cache) si gasim elementul ce are nr_acces cel mai mic, dupa care "last" va pointa catre elementul respectiv, acesta fiind elementul care va fi eliminat din lista.
 Insa, daca avem mai multe elemente din lista care au acelasi nr_acces si acesta reprezentand minimu-ul, mai facem o verificare a indexu-lui acestor elemente, prin urmare selectand-ul pe cel cu index-ul mai mare( adica a elementului care a fost adaugat in lista cu mai mult timp in urma, celui mai "vechi").
