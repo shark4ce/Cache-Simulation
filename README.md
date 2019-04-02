@@ -9,22 +9,31 @@ In acest program am realizat implemetarea a 3 tipuri de Cache ce folosesc 3 meto
 Rezultatul va fi generat in fisierul a.out, iar fisierul de input este test.in(poate fi modificat din Makefile).
 
 Astfel, cele 3 tipuri de cache sunt:
+
+
 --LRU(least recently used) - elementul cel mai putin utilizat va fi inlocuit cu
 noul obiect.
+
+
 ---FIFO (first in first out) - elementul de la inceputul cozii va fi eliminat, iar
 noul element va fi inserat la finalul cozii
+
+
 ---LFU (least frequently used) - de fiecare data cand un obiect trebuie eliminat din cache, se va elimina cel
 care a fost accesat de cele mai putine ori de cand se afla in cache.Daca toate obiectele care se afla in cache la un momentdat au fost accesate de un numar de ori egal, atunci cel care va fi eliminat va fi primul care a fost adaugat (fiind cel mai vechi). 
+
 
 Memoria principala va fi reprezentata sub forma unui array ce contine toate
 obiectele ce vor fi adaugate la un moment dat. Chiar daca un obiect se gaseste in cache, acesta va fi
 prezent si in memoria principala.
+
 
 Obiectele folosite de cele 2 memorii sunt de 3 tipuri. Se va porni de la clasa
 Subscriptie (clasa abstracta) si vom obtine trei clase: Free (mosteneste clasa abstracta
 Subscriptie), Basic (mosteneste clasa Free) si Premium (mosteneste clasa Basic). Toate
 tipurile de subscriptie contin un nume (sir de caractere) ce reprezinta numele titularului ce
 are subscriptia respectiva.
+
 
 Fiecare subscriptie contine numarul de cereri pana la epuizarea celei de tipul
 Premium si Basic, iar cea Free este nelimitata. In cazul operatiilor de tip GET numele scris
@@ -35,6 +44,8 @@ automat Basic, analog devenind ulterior Free care poate fi accesata de un numar 
 de ori.
 
 ---Operatii---
+
+
 1.ADD [nume_obiect] [cereri_basic] [cereri_premium] - la fiecare adaugare de
 nou element, acesta va fi inserat numai in memoria principala, nu si in
 cache, iar in cazul in care un element exista deja in memoria principala sau
@@ -64,7 +75,9 @@ numarul 2.
 
 
 ----Deatlii despre implementare----
-	1.In Main citesc datele input din fisier si in functie de ele creez un obiect de tip MainMemory in care am un ArrrayList 
+
+
+   1.In Main citesc datele input din fisier si in functie de ele creez un obiect de tip MainMemory in care am un ArrrayList 
 ce va reprezenta lista(vectorul) de obiecte adaugate si un obiect ce poarte definita interfetei Cache(tipul obiectului dat
 va fi creat conform cerinterlor din fisiere, adica LRU,LFU sau FIFO).Prin urmare, conform datelor din fisier efectuezvcomanda
 "ADD" cu ajutorul metodei add() din clasa MainMemory si comanda "GET" cu ajutorul metodei addInCache() din interfata Cache
